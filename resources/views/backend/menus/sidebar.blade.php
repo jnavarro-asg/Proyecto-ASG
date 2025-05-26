@@ -40,10 +40,38 @@
                     </ul>
                  </li>
                 @endcan
+                 <!-- ROLES Y PERMISO -->
+                 <li class="nav-item">
+
+                     <a href="#" class="nav-link nav-">
+                        <i class="fa fa-plane"></i>
+                        <p>
+                            Información Vuelos
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.roles.index') }}" target="frameprincipal" class="nav-link">
+                                <i class="fa fa-id-card nav-icon"></i>
+                                <p>Control de Acceso</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('admin.permisos.index') }}" target="frameprincipal" class="nav-link">
+                                <i class="fa fa-file nav-icon"></i>
+                                <p>Reportes</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                 </li>
 
 
 
-
+            <!-- cierre menu -->
             </ul>
         </nav>
 
