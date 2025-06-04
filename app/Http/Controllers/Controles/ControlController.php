@@ -28,8 +28,9 @@ class ControlController extends Controller
             // no tiene ningun permiso de vista, redirigir a pantalla sin permisos
             $ruta = 'no.permisos.index';
         }
+      
+        $titulo = "AIRSECURITY";
 
-        $titulo = "Proyecto ASG AIRSECURITY";
 
         return view('backend.index', compact( 'ruta', 'user', 'titulo'));
     }
