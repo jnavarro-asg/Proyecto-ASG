@@ -11,130 +11,46 @@
     table{
         /*Ajustar tablas*/
         table-layout:fixed;
-
-        
     }
-
-    /* COLOR  DE LA LISTA DE ROL Y PERMISO */
-        .card-success > .card-header {
-            background: rgb(57, 155, 255) !important;
-            color: #fff !important;
-            border-radius: 8px 8px 0 0;
-        }
-        
-
-    </style>
+</style>
 
 <div id="divcontenedor" style="display: none">
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="col-sm-12">
-                <h1>Rol y Permisos</h1>
-            </div>
-            <br>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
 
-            <button type="button" style="font-weight: bold; background-color:rgb(0, 123, 255); color: white !important;" value="Nuevo Rol" onclick="modalAgregar()" class="button button-3d button-rounded button-pill button-small">
-                <i class="fas fa-edit"></i>
-                Nuevo Rol
-            </button>
-
-            <button type="button" style="font-weight: bold; background-color:rgb(0, 123, 255); color: white !important;" 
-            value="Lista de Permisos" onclick="vistaPermisos()" class="button button-3d button-rounded button-pill button-small">
-                <i class="fas fa-list-alt"></i>
-                Lista de Permisos
-            </button>
-
-           <!-- <button type="button" style="font-weight: bold; background-color: #28a745; color: white !important;" value="Actualizar" onclick="actualizarTabla()" class="button button-3d button-rounded button-pill button-small">
-                <i class="fas fa-list-alt"></i>
-                Actualizar Tabla
-            </button>-->
-
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Registrar Vuelo</h4>
         </div>
-    </section>
-
-    <section class="content">
-        <div class="container-fluid">
-            <div class="card card-success">
-                <div class="card-header">
-                    <h3 class="card-title">Lista</h3>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div id="tablaDatatable"></div>
-                        </div>
+        <div class="card-body">
+            <form action="{{ route('admin.vuelo.store') }}" method="POST">
+                @csrf
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="nombre" class="form-label">Nombre del vuelo</label>
+                        <input type="text" name="numero_vuelo" id="numero_vuelo" class="form-control" required>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <div class="modal fade" id="modalAgregar">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Nuevo Rol</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="formulario-nuevo">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-12">
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="ingreso" class="form-label">Ingreso (fecha y hora)</label>
+                        <input type="datetime-local" name="fecha" id="fecha" class="form-control" required>
+                    </div>
 
-                                    <div class="form-group">
-                                        <label>Nombre</label>
-                                        <input type="text" maxlength="30" autocomplete="off" class="form-control" id="nombre-nuevo" placeholder="Nombre">
-                                    </div>
+                </div>
 
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                <div class="text-end">
+                    <button type="submit" class="btn btn-success">Registrar</button>
+                    <a href="" class="btn btn-secondary">Cancelar</a>
                 </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" style="background-color: #28a745; color: white !important;" class="button button-3d button-rounded button-pill button-small" onclick="agregarRol()">Agregar</button>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
+</div>
 
-    <div class="modal fade" id="modalBorrar">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Borrar Rol Global</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="formulario-borrar">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-12">
 
-                                    <p>Esta acción eliminara el Rol con todos sus Permisos.</p>
-
-                                    <div class="form-group">
-                                        <input type="hidden" id="idborrar">
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" style="font-weight: bold; background-color: #ff4351; color: white !important;" class="button button-3d button-rounded button-pill button-small" onclick="borrar()">Borrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+   
 </div>
 
 @extends('backend.menus.footerjs')
@@ -252,7 +168,6 @@
             $('#tablaDatatable').load(ruta);
         }
 
-
         // PARA ACTUALIZAR TABLA DE COSTOS
         function actualizarTabla(){
 
@@ -275,7 +190,6 @@
                     toastr.error('Error al guardar');
                 });
         }
-
     </script>
 
 

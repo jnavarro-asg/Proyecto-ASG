@@ -1,4 +1,12 @@
 
+<style>
+      /* COLOR DEL NAVBAR */
+            .main-header.navbar {
+            background: rgb(0, 123, 255) !important;
+            
+            border-bottom: none; /* Opcional: quita el borde inferior */
+        }
+</style>
 <nav class="main-header navbar navbar-expand border-bottom navbar-dark">
     <ul class="navbar-nav">
         <li class="nav-item">

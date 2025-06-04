@@ -8,23 +8,41 @@ use App\Http\Controllers\Backend\Roles\PermisoController;
 use App\Http\Controllers\Backend\Perfil\PerfilController;
 use App\Http\Controllers\Backend\Configuracion\ConfiguracionController;
 use App\Http\Controllers\Backend\Registro\RegistroController;
-
-
+use App\Http\Controllers\Frontend\AccesoController;
+use App\Http\Controllers\AccesoFrontendController;
+use App\Http\Controllers\VueloFrontendController;
 
 use App\Http\Controllers\Backend\Dashboard\DashboardController;
-
-
 // --- LOGIN ---
-
 Route::get('/', [LoginController::class,'index'])->name('login');
-
 Route::post('/admin/login', [LoginController::class, 'login']);
 Route::post('/admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
+
 // --- CONTROL WEB ---
-
 Route::get('/panel', [ControlController::class,'indexRedireccionamiento'])->name('admin.panel');
+Route::get('/admin/home', [ControlController::class, 'home'])->name('admin.home');
 
+
+// ---RUTAS DE ACCESOS ---
+Route::get('/admin/accesos/index', [AccesoFrontendController::class, 'index'])->name('admin.accesos.index');
+Route::get('/admin/accesos/create', [AccesoFrontendController::class, 'create'])->name('admin.accesos.create');
+Route::post('/admin/acceso/store', [AccesoFrontendController::class, 'store'])->name('admin.accesos.store');
+Route::get('/admin/acceso/show', [AccesoFrontendController::class, 'index'])->name('admin.accesos.show');
+Route::get('/admin/acceso/edit/{acceso}', [AccesoFrontendController::class, 'edit'])->name('admin.accesos.edit');
+Route::put('/admin/acceso/update/{acceso}', [AccesoFrontendController::class, 'update'])->name('admin.accesos.update');
+Route::delete('/admin/acceso/{acceso}', [AccesoFrontendController::class, 'destroy'])->name('admin.accesos.destroy');
+
+//RUTAS DE VUELOS
+Route::get('/admin/vuelos/index', [VueloFrontendController::class, 'index'])->name('admin.vuelo.index');
+Route::get('/admin/vuelos/create', [VueloFrontendController::class, 'create'])->name('admin.vuelo.create');
+Route::post('/admin/vuelo/store', [VueloFrontendController::class, 'store'])->name('admin.vuelo.store');
+Route::get('/admin/vuelos/show', [VueloFrontendController::class, 'index'])->name('admin.vuelo.show');
+
+Route::get('/admin/vuelo/edit/{vuelo}', [VueloFrontendController::class, 'edit'])->name('admin.vuelo.edit');
+Route::put('/admin/vuelo/update/{vuelo}', [VueloFrontendController::class, 'update'])->name('admin.vuelo.update');
+
+Route::delete('/admin/vuelo/{vuelo}', [VueloFrontendController::class, 'destroy'])->name('admin.vuelo.destroy');
 // --- ROLES ---
 
 Route::get('/admin/roles/index', [RolesController::class,'index'])->name('admin.roles.index');
@@ -56,5 +74,3 @@ Route::post('/admin/editar-perfil/actualizar', [PerfilController::class, 'editar
 Route::get('sin-permisos', [ControlController::class,'indexSinPermiso'])->name('no.permisos.index');
 
 Route::get('/admin/dashboard', [DashboardController::class,'vistaDashboard'])->name('admin.dashboard.index');
-
-
